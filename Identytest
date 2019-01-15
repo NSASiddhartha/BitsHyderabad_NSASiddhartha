@@ -1,0 +1,86 @@
+#Question1:
+list1 = []
+list2 = []
+sum = 0
+with open('Data Question 6 Transaction.log', 'r') as f:
+    content = f.readlines()
+    for x in content:
+        row = x.split()
+        list1.append(str(row[0]))
+        list2.append(int(row[1]))
+n = len(list1)
+for x in range(1,n):
+    if list1[x] == 'D':
+        sum = sum + list2[x]
+    elif list1[x] == 'W':
+        sum = sum - list2[x]
+print(sum)
+with open('Data Question 6 Transaction.log', 'a') as myfile:
+    myfile.write("\n"+str(sum))
+
+#Question2:
+import numpy as np
+array = np.random.randint(100, size = (5, 4))
+print(array)
+for i in range(1,5):
+    for j in range(1,4):
+        if array[i,j] > 50:
+            array[i,j] = 100
+print(array)
+
+#Question3:
+from skimage import color
+from skimage import io
+from PIL import Image 
+
+img = color.rgb2gray(io.imread('image.png'))
+img.save("greyscalepicture.jpg") 
+
+#Question4:
+import numpy as np
+array = np.random.randint(100, size = 10)
+for i in range(0,len(array)):
+    if (i+1)%2 == 0:
+           array[i] = -10
+print(array)
+
+#Question5:
+import numpy as np
+list1 = []
+array1 = np.random.randint(100, size = 10)
+tf = np.array([True, False])
+array2 = np.random.choice(tf, len(array1))
+for x in range(0,len(array1)):
+    if array2[x] is True:
+        list1.append(array1[i])
+print(array1)
+print(array2)
+print(list1)
+
+#Question8
+import numpy as np
+import pandas
+from keras.models import Sequential
+from keras.layers import Dense
+Y=np.random.rand(10)
+X=np.random.rand(10)
+Z = X*0.12 + Y*0.45
+
+model = Sequential()
+model.add(Dense(units=200, input_dim=1))
+model.add(Activation('relu'))
+model.add(Dense(units=45))
+model.add(Activation('relu'))
+model.add(Dense(units=1))
+
+model.compile(loss='mean_squared_error',
+              optimizer='rmsprop')
+
+model.fit(x_train, Z, epochs=10, batch_size=50, verbose=1)
+
+loss_and_metrics = model.evaluate(x_test, y_test, batch_size=100)
+
+test=x_test.reshape(-1)
+plt.plot(test,classes,c='r')
+plt.plot(test,y_test,c='b')
+plt.show()
